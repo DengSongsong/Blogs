@@ -244,4 +244,4 @@ window.addEventListener(('orientationchange' in window ? 'orientationchange' : '
 
 ## [源码](https://github.com/DengSongsong/Blogs/blob/master/demos/rem/index.html)
 
-最后，附上博文地址如果觉得有用的话希望[star](https://github.com/DengSongsong/Blogs)下，欢迎一起交流~~~
+最后，附上博文地址[github](https://github.com/DengSongsong/Blogs/issues/3)地址如果觉得有用的话希望[star](https://github.com/DengSongsong/Blogs)下，欢迎一起交流~~~
