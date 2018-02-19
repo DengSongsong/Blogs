@@ -15,7 +15,8 @@
 
 ## 三、BFC的特性及作用
 1. 同一个BFC下外边距会发生折叠及其解决方法
-[demo1](1)
+
+[demo1](https://github.com/DengSongsong/Blogs/blob/master/demos/BFC/index.html)
 
 ```
 <style>
@@ -37,7 +38,7 @@
 </p>
 <p>若想避免外边距重叠，将这两个div元素放在不同的BFC容器中,用overflow：hidden产生BFC来解决</p>
 
-[demo2](2)
+[demo2](https://github.com/DengSongsong/Blogs/blob/master/demos/BFC/index2.html)
 
 ```
 <style>
@@ -66,7 +67,8 @@
 <p>
 在通常情况下父元素的高度会被子元素撑开，而在这里因为其子元素为浮动元素所以父元素发生了高度坍塌，上下边界重合。浮动元素会脱离文档流
 </p>
-[demo3](3)
+
+[demo3](https://github.com/DengSongsong/Blogs/blob/master/demos/BFC/index3.html)
 
 ```
 <style>
@@ -90,7 +92,8 @@
 ![](https://raw.githubusercontent.com/DengSongsong/Blogs/master/images/BFC/3.png)
 
 <p>容器内元素浮动，脱离了文档流，所以容器只剩下2px的边距高度。如果触发容器的BFC，容器将会包含浮动元素，overflow：hidden，清除浮动</p>
-[demo4](4)
+
+[demo4](https://github.com/DengSongsong/Blogs/blob/master/demos/BFC/index4.html)
 
 ```
 <style>
@@ -115,7 +118,8 @@
 ![](https://raw.githubusercontent.com/DengSongsong/Blogs/master/images/BFC/4.png)
 
 3. 阻止元素被浮动元素覆盖及其解决方法
-[demo5](5)
+
+[demo5](https://github.com/DengSongsong/Blogs/blob/master/demos/BFC/index5.html)
 
 ```
 <style>
@@ -141,7 +145,7 @@
 
 <p>第二个元素有部分被浮动元素所覆盖,如果想避免元素被覆盖，可触第二个元素的 BFC 特性，在第二个元素中加入 overflow: hidden</p>
 
-[demo6](6)
+[demo6](https://github.com/DengSongsong/Blogs/blob/master/demos/BFC/index6.html)
 
 ```
 <style>
