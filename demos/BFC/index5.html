@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>阻止元素被浮动元素覆盖</title>
+    <style>
+        .box1 {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+        .box2 {
+            width: 200px;
+            height: 150px;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+</body>
+</html>
