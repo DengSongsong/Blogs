@@ -6,24 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>多栏布局</title>
     <style>
-        .box1 {
-            float: left;
+       #div1{
+            width: 200px;
+            /* height: 50px; */
+            padding: 10px 20px 20px 10px;
+            background: red;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        #div2{
             width: 100px;
             height: 100px;
-            background-color: red;
-        }
-        .box2 {
-            overflow: hidde;
-            /* width: 100px; */
-            height: 100px;
-            background-color: blue;
+            background: green;
+            float: left;
         }
     </style>
 </head>
 <body>
-    <div>
-        <div class="box1"></div>
-         <div class="box2"></div>
+    <div id="div1" >
+        <div id="div2" ></div>
     </div>
 </body>
 </html>
