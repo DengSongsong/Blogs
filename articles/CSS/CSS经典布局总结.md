@@ -3,10 +3,12 @@
 运用场景：如果页面内容不够长的时候，页脚块粘贴在视窗底部；如果内容足够长时，页脚块会被内容向下推送著作权归作者所有。
 </p>
 <p>效果图：</p>
+
 ![](https://raw.githubusercontent.com/DengSongsong/Blogs/master/images/cssLayout/1.png) ![](https://raw.githubusercontent.com/DengSongsong/Blogs/master/images/cssLayout/2.gif)
 
 ### 解决方案
 1. 父级fixed
+
 [demo1](1)
 
 ```
@@ -68,6 +70,7 @@
 </body>
 ``` 
 2. Flexbox
+
 [demo2](2)
 
 ```
@@ -119,6 +122,7 @@
 </body>
 ``` 
 3. calc函数
+
 [demo3](3)
 
 ```
