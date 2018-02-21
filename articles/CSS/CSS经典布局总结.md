@@ -1,12 +1,12 @@
 ## 一、Sticky footers布局
 <p>
-运用场景：如果页面内容不够长的时候，页脚块粘贴在视窗底部；如果内容足够长时，页脚块会被内容向下推送著作权归作者所有。
+运用场景：如果页面内容不够长的时候，页脚块粘贴在视窗底部；如果内容足够长时，页脚块会被内容向下推送。
 </p>
 <p>效果图：</p>
 
 ![](https://raw.githubusercontent.com/DengSongsong/Blogs/master/images/cssLayout/1.png) ![](https://raw.githubusercontent.com/DengSongsong/Blogs/master/images/cssLayout/2.gif)
 
-### 解决方案
+### 实现方案
 1. 父级fixed
 
 [demo1](1)
@@ -58,9 +58,7 @@
     <div class="container">
         <div class="container-wrapper clearfix">
             <div class="container-main">
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
+                ...
             </div>
         </div>
         <div class="container-footer">  
@@ -110,9 +108,7 @@
     <div class="container">
         <div class="container-wrapper">
             <div class="container-main">
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
+                ...
             </div>
         </div>
         <div class="container-footer">  
@@ -160,9 +156,7 @@
     <div class="container">
         <div class="container-wrapper">
             <div class="container-main">
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
-                Sticky footers布局Sticky footers布局 Sticky footers布局Sticky footers布局
+                ...
             </div>
         </div>
         <div class="container-footer">  
@@ -171,3 +165,11 @@
     </div>
 </body>
 ``` 
+
+## 二、两栏布局
+<p>一栏定宽，一栏自适应</p>
+
+### 实现方案
+1. float + margin
+2. BFC实现
+3. flexBox实现
