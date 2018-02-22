@@ -8,7 +8,7 @@
 1. [移动端rem布局的学习](https://github.com/DengSongsong/Blogs/issues/3)
 2. [对BFC的理解](https://github.com/DengSongsong/Blogs/issues/5)
 3. [清除浮动](https://github.com/DengSongsong/Blogs/issues/6)
-4. [CSS经典布局总结](https://github.com/DengSongsong/Blogs/issues/7)
+4. [CSS布局总结](https://github.com/DengSongsong/Blogs/issues/7)
 ### 原生JS目录
 1. [javascript this的学习总结](https://github.com/DengSongsong/Blogs/issues/2)
 2. [你不知道的javascript事件](https://github.com/DengSongsong/Blogs/issues/4)
