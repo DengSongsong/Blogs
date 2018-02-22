@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>两栏布局 float + margin实现</title>
+    <style>
+        .left {
+            float: left;
+            width: 200px;
+            height: 400px;
+            background-color: blue;
+            text-align: center;
+        }
+        .right {
+            height: 400px;
+            margin-left: 200px;
+            background-color: yellow;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="left">定宽</div>
+    <div class="right">自适应</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>两栏布局 flexBox实现</title>
+    <style>
+        .container {
+            width: 100%;
+            display: flex;
+        }
+        .left {
+            width: 200px;
+            height: 400px;
+            flex: 0 0 200px;
+            background-color: blue;
+            text-align: center;
+        }
+
+        .right {
+            flex: 1;
+            height: 400px;
+            background-color: yellow;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">定宽</div>
+        <div class="right">自适应</div>
+    </div>
+</body>
+
+</html>
