@@ -16,5 +16,6 @@
 2. [你不知道的javascript事件](https://github.com/DengSongsong/Blogs/issues/4)
 3. [浏览器的重绘和重排问题](https://github.com/DengSongsong/Blogs/issues/9)
 4. [正则表达式学习之基础一](https://github.com/DengSongsong/Blogs/issues/10)
-4. [正则表达式学习之基础二](https://github.com/DengSongsong/Blogs/issues/11)
+5. [正则表达式学习之基础二](https://github.com/DengSongsong/Blogs/issues/11)
+6. [正则表达式学习之进阶](https://github.com/DengSongsong/Blogs/issues/12)
 ### vue目录
