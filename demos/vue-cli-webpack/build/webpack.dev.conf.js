@@ -1,4 +1,5 @@
 'use strict'
+// 工具函数集合
 const utils = require('./utils')
 const webpack = require('webpack')
 // 配置文件
@@ -18,12 +19,14 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
+// webpack的基本配置文件与当前配置文件以下内容合并
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     // styleLoaders
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
   // cheap-module-eval-source-map is faster for development
+  // 在开发模式下，可以查看源码
   devtool: config.dev.devtool,
 
   // these devServer options should be customized in /config/index.js
@@ -51,12 +54,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    // 通过插件修改定义的变量，配置的是全局变量
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
-    // HotModule 插件在页面进行变更的时候只会重绘对应的页面模块，不会重绘整个html文件
+    // 模块热替换插件（HMR）在页面进行变更的时候只会重绘对应的页面模块，不会重绘整个html文件
+    // 永远不要在生产环境(production)下启动HMR
     new webpack.HotModuleReplacementPlugin(),
+    // 当开启HMR的时候使用该插件会显示模块的相对路径，建议用于开发环境
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+    // 在编译出现错误时，使用该插件来跳过输出阶段。这样可以确保输出资源不会包含错误
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
