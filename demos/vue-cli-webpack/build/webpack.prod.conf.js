@@ -17,10 +17,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // webpack优化压缩和优化css的插件
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+// 压缩输出的javascript代码
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-
+// 变量环境
 const env = require('../config/prod.env')
 
+// webpack的基本配置文件与当前配置文件以下内容合并
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     // styleLoaders
@@ -41,23 +43,30 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
+    // 通过插件修改定义的变量，配置的是全局变量
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    // 压缩js
+    // 压缩输出的js代码
     new UglifyJsPlugin({
+      // 参数
       uglifyOptions: {
         compress: {
+          // 在UglifyJS删除没有用到的代码时不输出警告
           warnings: false
         }
       },
+      // 不开启sourceMap
+      // 使用 source map 将错误信息的位置映射到模块（这会减慢编译的速度） 
       sourceMap: config.build.productionSourceMap,
+      // 使用多进程并行运行和文件缓存来提高构建速度
       parallel: true
     }),
-    // // 提取css
+    // // 提取出javascript代码里的css到单独文件中
     // extract css into its own file
     new ExtractTextPlugin({
+      // 生成文件的文件名
       filename: utils.assetsPath('css/[name].[contenthash].css'),
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
@@ -79,23 +88,34 @@ const webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     // 将index.html作为入口，注入html代码后生成index.html文件
     new HtmlWebpackPlugin({
+      // 用于生成的html文件的名称，默认是index.html
       filename: config.build.index,
+      // 模板的路径
       template: 'index.html',
+      // 把所有产出文件注入到给定的template或templateContent
       inject: true,
+      // 压缩配置
       minify: {
+        // 删除html中的注释代码
         removeComments: true,
+        // 删除html中的空白符
         collapseWhitespace: true,
+        // 删除html元素中属性的引号
         removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       // 必须通过CommonsChunkPlugin一致的处理多个chunks
+      // 按dependency的顺序引入
       chunksSortMode: 'dependency'
     }),
     // keep module.id stable when vendor modules does not change
+    // 该插件会根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境
     new webpack.HashedModuleIdsPlugin(),
-    // enable scope hoisting
+    // enable scope hoisting  作用域提升
+    // 过去 webpack 打包时的一个取舍是将 bundle 中各个模块单独打包成闭包。这些打包函数使你的 JavaScript 在浏览器中处理的更慢
+    // 该插件作用是提升或者预编译所有模块到一个闭包中，提升代码在浏览器中的执行速度
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
@@ -128,6 +148,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
 
     // copy custom static assets
+    // 复制静态文件，将static文件内的内容复制到制定文件夹
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
