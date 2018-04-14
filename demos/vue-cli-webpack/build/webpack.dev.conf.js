@@ -11,7 +11,8 @@ const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
 // webpack复制文件和文件夹的插件
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-// 自动生成html并且注入到.html文件中的插件
+// 将webpack编译打包后的文件注入到.html文件中
+// 自动的在.html文件里面加上<link>和<script>标签引用webpack打包后的文件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // webpack错误信息提示插件
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
@@ -24,7 +25,8 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 // webpack的基本配置文件与当前配置文件以下内容合并
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
-    // styleLoaders
+    // 样式文件的处理规则，对css/less/sass/stylus/styl等不同内容使用相应的styleLoaders
+    // 由utils配置出各种类型的预处理语言所需要使用的loader
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
   // cheap-module-eval-source-map is faster for development
@@ -85,7 +87,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     // 当开启HMR的时候使用该插件会显示模块的相对路径，建议用于开发环境
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
-    // 在编译出现错误时，使用该插件来跳过输出阶段。这样可以确保输出资源不会包含错误
+    // 在编译出现错误时，使用该插件来跳过输出阶段。这样可以确保输出资源不会包含错误，在编译结束后报错
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     // 将index.html 作为入口，注入html代码后生成index.html文件
@@ -120,6 +122,7 @@ module.exports = new Promise((resolve, reject) => {
       devWebpackConfig.devServer.port = port
 
       // Add FriendlyErrorsPlugin
+      // 友好的错误提示
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],

@@ -4,7 +4,12 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
-// 获取绝对路径
+/**
+ * @author DengSongsong
+ * @method resolve
+ * @param {String} dir 相对于本文件的路径
+ * @return {String} 绝对路径 
+ */
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -70,12 +75,14 @@ module.exports = {
         loader: 'url-loader',
         options: {
           // limit用于控制在文件的大小小于limit时才使用url-loader
+          // 将小于10k资源转成base64编码的dataURL字符串到代码中
           limit: 10000,
+          // 其他资源转移到静态资源文件夹
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
       {
-        // 处理mp4等文件
+        // 处理多媒体资源等文件
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {

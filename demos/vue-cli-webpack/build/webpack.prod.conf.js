@@ -37,9 +37,9 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     // 编译输出的静态资源根路径
     path: config.build.assetsRoot,
-    // 便宜输出的文件名
+    // 编译输出的文件名
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    // 没有指定输出名的文件输出的文件名
+    // 没有指定输出名的文件输出的文件名，非入口文件的文件名，而又需要被打包出来的文件命名配置（按需加载模块）
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
@@ -118,10 +118,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     // 该插件作用是提升或者预编译所有模块到一个闭包中，提升代码在浏览器中的执行速度
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
+    // 分离公共js到vendor中
     new webpack.optimize.CommonsChunkPlugin({
+      // 公共js文件名
       name: 'vendor',
       minChunks (module) {
         // any required modules inside node_modules are extracted to vendor
+        // node_modules中的任何所需模块都提取到vendor，分离第三方库
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
@@ -133,6 +136,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
+    // 将webpack runtime和module manifest提取到单独文件，以防止当app包更新时导致公共vendor文件hash也更新
+    // 上面虽然分离了第三方库，但每次修改编译都会改变vendor的hash值，导致浏览器缓存失效。原因是
+    // vendor包含了webpack在打包过程中产生的一些运行时代码，运行时代码中实际上保存了打包后的文件名。
+    // 当修改业务代码时，业务代码的js文件的hash值必然会改变。一旦改变必然会导致vendor变化。vendor变化会导致其hash值变化
+    // 下面主要是将运行时代码提取到单独的manifest文件中，防止其影响vendor.js 
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity
@@ -140,6 +148,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
     // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
+    // 提取额外异步公共代码
     new webpack.optimize.CommonsChunkPlugin({
       name: 'app',
       async: 'vendor-async',
@@ -158,25 +167,31 @@ const webpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
-
+// 配置文件开启了gzip压缩
 if (config.build.productionGzip) {
+  // 引入压缩文件插件，该插件会对生成的文件进行压缩，生成一个.gz文件
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
-
+  // 向webpackConfig.plugins中添加如下插件
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
+      // 目标文件名
       asset: '[path].gz[query]',
+      // 使用gzip压缩
       algorithm: 'gzip',
+      // 使用正则表达式命中
       test: new RegExp(
         '\\.(' +
         config.build.productionGzipExtensions.join('|') +
         ')$'
       ),
+      // 资源文件大于10240B(10KB)时会被压缩
       threshold: 10240,
+      // 最小压缩比达到0.8时才会被压缩
       minRatio: 0.8
     })
   )
 }
-
+// 开启包分析情况，向webpackConfig.plugins添加webpack-bundle-analyzer插件
 if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
